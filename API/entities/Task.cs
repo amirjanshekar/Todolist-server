@@ -17,6 +17,6 @@ namespace API.entities
 
         public int Date { get; set; }
 
-        public bool IsChecked { get; set; } = false;
+        public bool IsChecked { get; set; } = true;
     }
 }

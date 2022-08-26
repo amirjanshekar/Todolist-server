@@ -53,5 +53,21 @@ namespace API.Controllers
                 <entities.Task
                 >($"Select * FROM Tasks WHERE Tasks.UserId={UserId} AND Tasks.Date={Date}");
         }
+
+        [HttpPut("{UserId}/{Id}",Name = "SetCheckStatus")]
+        public ActionResult<entities.Task> SetTaskStatus(int UserId, int Id){
+            _context.Tasks.Find(Id).IsChecked = !_context.Tasks.Find(Id).IsChecked;
+            _context.SaveChangesAsync();
+            return _context.Tasks.Find(Id);
+        }
+
+        [HttpDelete("{UserId}/{Id}",Name = "DeleteTask")]
+        public async Task<bool> DeleteTask(int UserId, int Id){
+
+            _context.Tasks.Remove(_context.Tasks.Find(Id));
+            await _context.SaveChangesAsync();
+            return true;
+        }
+    
     }
 }
